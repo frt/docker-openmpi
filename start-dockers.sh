@@ -5,7 +5,7 @@ network_name=${2:-mpi_network}
 
 docker network create "$network_name"
 for i in $(seq 0 $(( $nr_nodes - 1 ))); do
-    docker run -d \
+    docker run -d --rm \
         --name "node$i" \
         --network "$network_name" \
         --mount type=bind,src=/usr/local,dst=/usr/local,ro \
