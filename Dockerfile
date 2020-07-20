@@ -8,7 +8,9 @@ ENV HOME /home/${USER}
 RUN pacman --noconfirm -Sy openmpi openssh
 RUN ssh-keygen -A
 RUN useradd ${USER} \
-    && mkdir -p ${HOME}/.ssh
+    && mkdir -p ${HOME}/.ssh ${HOME}/.openmpi
+
+ADD mca-params.conf ${HOME}/.openmpi/mca-params.conf
 
 COPY ssh-keys/id_rsa.mpi ${HOME}/.ssh/id_rsa
 COPY ssh-keys/id_rsa.mpi.pub ${HOME}/.ssh/authorized_keys
